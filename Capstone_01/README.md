@@ -42,7 +42,7 @@ pandas dataframes, which are then saved in the "data" directory as the following
 - data_outpatient_2011.
 - data_outpatient_2012.
 
-"01_optional_data_outpatient_year_details" code file is optional in case the reader wish to
+"01_optional_data_outpatient_year_details" code file is optional in case the reader wishes to
 see the tasks that are being performed in "01_data_outpatient_years" code file step-by-step
 (just choose a year in the second cell). Otherwise, skip it.
 
