@@ -34,15 +34,17 @@ data confidentiality. It creates five new csv files to replace those with confid
 - datos_ambulatorios_2012_new.  
 
 "01_data_outpatient_years" code file organize the newly created five csv files into python
-pandas dataframes, which are then saved in the "data" directory as the following csv files.
-Please, check the "data" directory. The reader may wish to see step-by-step what tasks are
-being performed by opening "01_optional_data_outpatient_year_details code file" and choosing
-a year in the second cell.
+pandas dataframes, which are then saved in the "data" directory as the following csv files
+(please, check the "data" directory):
 - data_outpatient_2008.
 - data_outpatient_2009.
 - data_outpatient_2010.
 - data_outpatient_2011.
 - data_outpatient_2012.
+
+"01_optional_data_outpatient_year_details" code file is optional in case the reader wish to
+see the tasks that are being performed in "01_data_outpatient_years" code file step-by-step
+(just choose a year in the second cell). Otherwise, skip it.
 
 "02_mean_outpatient_costs_usd" code file deals with the "costos_promedios_ambulatorios" csv file,
 organizing it into a python pandas dataframe and saving it in the "data" directory as
@@ -61,7 +63,7 @@ specialty identification code.
 
 3-) First analyses.
 
-"05_first_analyses" code file contains the first analyses using the resulting "data_panel" csv file.
+"05_first_analyses" code file contains the first analyses using the abovementioned "data_panel" csv file.
 Please, check the "data_panel" csv file in the "data" directory.
 Because many medical specialties and departments (locations) don't have enough data, my suggestion was
 to focus on 8 specialties and 9 departments that do have data for all years between 2008-2012.
