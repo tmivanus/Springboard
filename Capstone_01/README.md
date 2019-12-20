@@ -9,7 +9,7 @@ visits and ambulatory surgeries. If the role of specialty, locality and time is 
 factors such as moral hazard and supplier-induced demand may need to be investigated.
 
 Please, go to capstone_01_report for more details.  
-Please, go to https://github.com/tmivanus/Springboard/tree/master/Capstone_01 for all data and code.
+Please, go to https://github.com/tmivanus/Springboard/tree/master/Capstone_01 to see all data and codes.
 
 2-) Data.
 
