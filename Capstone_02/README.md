@@ -1,8 +1,7 @@
-Capstone 02: the booking company.
-Updated on 03/09/2020
+**Capstone 02: the booking company.**  
+*Updated on 03/09/2020.*
 
-
-1-) Purpose.
+**1-) Purpose.**
 
 We are going to work with data provided by a company that connects different clients to different firms. More specifically, the company allows clients to book (schedule) visits to firms in order to learn more about their production processes and final products. Each booking has an unique identification which is used as index in the data structure. For confidentiality reason, some information cannot and will not be made public. We have three main objectives:
 
@@ -12,8 +11,7 @@ We are going to work with data provided by a company that connects different cli
 
 Please, go to https://github.com/tmivanus/Springboard/tree/master/Capstone_02 to see all data and codes.
 
-
-2-) Data.
+**2-) Data.**
 
 The original data was stored in four different sheets inside a microsoft excel file named 'data_original'. That excel file was lightly organized and saved as a microsoft excel file named 'data_organized'. From 'data_organized' came three csv files: 'bookings_questions_data', 'bookings_addons_data' and 'main_data'. From the internet came other three csv files with necessary additional information: 'countries_data', 'us_regions_data' and 'us_zipcodes_data'. In particular, the source of 'us_zipcodes_data.csv' is https://simple.wikipedia.org/wiki/List_of_ZIP_Code_prefixes. In summary, we are going to work with the following six csv files in the 'data' directory:
 
@@ -47,5 +45,6 @@ Some of those files are not in fact made publicly available for confidentiality 
 
 'final_df.csv' and 'final_df_dtypelist.csv' are both necessary to recover 'final_df'. 'final_dic_df.csv' is necessary to recover 'final_dic'. Finally, 'final_dic_pub_df.csv' is necessary to recover 'final_dic_pub'. Please, check the last code cells in 'data_preparation' code file for a demonstration of how to recover 'final_df', 'final_dic' and 'final_dic_pub' using the csv files in the 'data_new' directory. In reality, for confidentiality reason, 'final_dic' is not made publicly available. Instead, only its censored version 'final_dic_pub' is made publicly available.
 
+**3-) Data analysis.**
 
-3-) Data analysis.
+...
