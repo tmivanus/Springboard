@@ -1,13 +1,19 @@
 **Capstone 02: the booking company.**  
-*Updated on 03/09/2020.*
+*Updated on 10/28/2020.*
 
 **1-) Purpose.**
 
-We are going to work with data provided by a company that connects different clients to different firms. More specifically, the company allows clients to book (schedule) visits to firms in order to learn more about their production processes and final products. Each booking has an unique identification which is used as index in the data structure. For confidentiality reason, some information cannot and will not be made public. We have three main objectives:
+We are going to work with data provided by a company that connects different clients to different firms. More specifically, the company allows clients to book (schedule) visits to firms in order to learn more about their production processes and final products. Each booking has an unique identification which is used as index in the data structure. For confidentiality reason, some information cannot and will not be made public. We have the following main objectives:
 
+- Organize the data in a single dataframe format.
+- Create a dictionary to help preserve the meaning of more obscure variables. 
+- Save all the newly organized information in the format of csv files as a backup.
+- Analyze the dataframe looking for missing data or mistakes.
+- Select a balanced subset of firms to be included in a more focused analysis approach. 
 - Analyze the network between clients booking visits and firms being visited.
-- Try to find groups of similar bookings to accurately segment clients (i.e., cluster analysis of bookings).
-- Predict whether or not bookings will be canceled.
+- Use supervised classification to predict relevant missing data.
+- Use unsupervised learning techniques to identify potential groups (clusters) of bookings based on the information available about each individual booking.
+
 
 Please, go to https://github.com/tmivanus/Springboard/tree/master/Capstone_02 to see all data and codes.
 
@@ -47,4 +53,12 @@ Some of those files are not in fact made publicly available for confidentiality 
 
 **3-) Data analysis.**
 
-In process... check 'data_analysis' code file.
+**3.1-) Analyzing and trimming the dataframe.**
+
+We are going to analyze the data stored in the dataframe 'final_df', which is located in the directory 'data_new'. The reader can check the 'data_preparation' code file to find out how 'final_df' was built. Many columns in that dataframe have self-explanatory titles. Other columns have descriptions located in the nested dictionary 'final_dic' (a dictionary of dictionaries). In reality, for confidentiality reason, 'final_dic' is not made publicly available. Instead, only its censored version 'final_dic_pub' is made publicly available.
+
+The files stored in the directory 'data_new' are actually csv files. We use them to recover 'final_df' and 'final_dic_pub' (the recovering of 'final_dic' is for private use only). In order to keep things safe and simple, we actually work with a copy of 'final_df' called just 'df' and a copy of 'final_dic_pub' called just 'df_dic_pub' (there is also a copy of 'final_dic' called 'df_dic' but it is for private use only).
+
+We first take a closer look at some variables to better understand them and detect possible problems. 
+
+... Under construction. Please, check 'data_analysis_and_results' code file ...
