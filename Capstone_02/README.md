@@ -53,7 +53,7 @@ Some of those files are not in fact made publicly available for confidentiality 
 
 **3-) Data analysis.**
 
-**3.1-) Analyzing and trimming the dataframe.**
+**3.1-) Getting to know the dataframe and initial trimming.**
 
 We are going to analyze the data stored in the dataframe 'final_df', which is located in the directory 'data_new'. The reader can check the 'data_preparation' code file to find out how 'final_df' was built. Many columns in that dataframe have self-explanatory titles. Other columns have descriptions located in the nested dictionary 'final_dic' (a dictionary of dictionaries). In reality, for confidentiality reason, 'final_dic' is not made publicly available. Instead, only its censored version 'final_dic_pub' is made publicly available.
 
@@ -61,4 +61,4 @@ The files stored in the directory 'data_new' are actually csv files. We use them
 
 We first take a closer look at some variables to better understand them and detect possible problems. 
 
-... Under construction. Please, check 'data_analysis_and_results' code file ...
+... This 'read_me' is under construction, but the code file has been completed. Please, check 'data_analysis_and_results' code file. Be aware that sometimes you need to reload the code file more than once so it can be visualized here at github ...
