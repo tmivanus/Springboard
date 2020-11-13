@@ -55,10 +55,18 @@ Some of those files are not in fact made publicly available for confidentiality 
 
 **3.1-) Getting to know the dataframe and initial trimming.**
 
-We are going to analyze the data stored in the dataframe 'final_df', which is located in the directory 'data_new'. The reader can check the 'data_preparation' code file to find out how 'final_df' was built. Many columns in that dataframe have self-explanatory titles. Other columns have descriptions located in the nested dictionary 'final_dic' (a dictionary of dictionaries). In reality, for confidentiality reason, 'final_dic' is not made publicly available. Instead, only its censored version 'final_dic_pub' is made publicly available.
+We use the 'data_analysis_and_results' code file to analyze the data stored in the dataframe 'final_df', which is located in the directory 'data_new'. The reader can check the 'data_preparation' code file to find out how 'final_df' was built. Many columns in that dataframe have self-explanatory titles. Other columns have descriptions located in the nested dictionary 'final_dic' (a dictionary of dictionaries). In reality, for confidentiality reason, 'final_dic' is not made publicly available. Instead, only its censored version 'final_dic_pub' is made publicly available.
 
 The files stored in the directory 'data_new' are actually csv files. We use them to recover 'final_df' and 'final_dic_pub' (the recovering of 'final_dic' is for private use only). In order to keep things safe and simple, we actually work with a copy of 'final_df' called just 'df' and a copy of 'final_dic_pub' called just 'df_dic_pub' (there is also a copy of 'final_dic' called 'df_dic' but it is for private use only).
 
-We first take a closer look at some variables to better understand them and detect possible problems. 
+We first took a closer look at some variables to better understand them and detect possible problems. Please, check the 'data_analysis_and_results' code file for detailed information. We worked only with 'firm_id' 40638, 36146 and 26742 in a more focused analysis approach. We selected these three firms because they have a high and somewhat balanced amount of non-null entries. We then trimmed the dataframe 'df' by:
+
+• ditching rows related to 'firm_id' other than 40638, 36146 and 26742.
+• ditching rows with null entries based on columns expected to have equal number of non-null entries ('firm_id', 'country', 'us_region', 'us_zipcode').
+• ditching 'age', 'age_range' and 'guests_in' columns due to the reasons explained in 'data_analysis_and_results' code file.
+• ditching the unnecessary 'merge_questions' and 'merge_addons' columns.
+
+It is worth noting that the original dataframe 'df' can be recovered any time if necessary by using the command df = final_df.copy(). After this first trimming process, the resulting dataframe 'df' shows firms 40638, 36146 and 26742 as having respectively 9005, 8043 and 7983 non-null entries (25031 non-null entries in total). Some columns related to questions (those starting with 'q') and addons (those starting with 'addons') were also deleted because they presented only null values. They refer to questions and addons that are not relevant to the three firms being investigated.
+
 
 ... This 'read_me' is under construction, but the code file has been completed. Please, check 'data_analysis_and_results' code file. Be aware that sometimes you need to reload the code file more than once so it can be visualized here at github ...
