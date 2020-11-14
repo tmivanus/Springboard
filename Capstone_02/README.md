@@ -68,5 +68,27 @@ We first took a closer look at some variables to better understand them and dete
 
 It is worth noting that the original dataframe 'df' can be recovered any time if necessary by using the command df = final_df.copy(). After this first trimming process, the resulting dataframe 'df' shows firms 40638, 36146 and 26742 as having respectively 9005, 8043 and 7983 non-null entries (25031 non-null entries in total). Some columns related to questions (those starting with 'q') and addons (those starting with 'addons') were also deleted because they presented only null values. They refer to questions and addons that are not relevant to the three firms being investigated.
 
+**3.2-) Network analysis.**
+
+Network analysis was implemented to see how different firms attract different clients from different regions (US states or foreign countries). We built a directed network that shows regions in blue connecting to firms in red. It uses booking data from 2016-08-31 to 2017-12-31 ('contact_date'). The size of each node is proportional to its degree (number of edges connecting it). The number on each edge informs its weight in terms of number of connections that edge actually represents. Technically speaking, we built a Weighted DiGraph representing a MultiDiGraph. Higher weights at the edges pull the regions closer to the firms as if firms more connected to a certain region exert more gravitational force on that region. The resulting layout shows that locality is an important attractiveness factor.
+
+We also studied the projected degree centrality values of region nodes per week. In a short period of time like a week, it is much more likely that the network formed will contain region nodes with projected degree centrality value lower than 1. The motivation was to see if we could build a meaningful numerical scale to represent the categorical variable 'us_region' based on connectivity. We were able to calculate for each region the 95% confidence interval (95% c. i.) for the mean of the weekly projected degree centrality values. Given a long period of weeks, it is possible to observe which regions are statistically similar or distinct in terms of projected conectivity among them. Most importantly, regions can be represented on a connectivity scale between 0 and 1. The minimum, maximum and middle of these confidence intervals can be used in other quantitative analyses, assuming that those intervals will remain stable as time (weeks) continous to pass. That information was added to the dataframe under the columns 'region_dc_95min' (minimum value of the 95% c. i.), 'region_dc_95max' (maximum value of the 95% c. i.), 'region_dc_mean' (middle value of the 95% c. i., which is the mean of the weekly projected degree centrality values) and 'region_dc_half_size' (half the size of the 95% c. i.).
+
+**3.2-) Final trimming, supervised classification and unsupervised clustering.**
+
+After further analysis and better understanding of the dataframe 'df' (please, check the details in 'data_analysis_and_results' code file), we carried out one last trimming process:
+
+- Columns 'q3' and 'feedback' were ditched. Among the columns related to questions and feedback, only 'q1_bef' and 'q2' have a good amount of non-null entries. The column 'q1_aft' was kept in spite of its high number of null entries because it is an interesting follow-up of column 'q1_bef'.
+- Columns related to addons were ditched. They are specific to each firm. Addons 02, 10, 11 and 24 are specific to firm 40638. Addons 01, 13, 14 and 16 are specific to firm 36146. There is no addons for firm 26742. In each case, the amount of non-null entries is small compared to the size of the sample. On the other hand, the columns 'tot_rev_addons' and 'tot_rev' were kept.
+- Column 'tot_quant_addons' was ditched. It does not make sense to sum quantities of addons from different varieties or qualities.
+- The columns 'status_cancel' and 'payment_cc' were ditched. The data available for them practically doesn't vary. On the other hand, the columns 'source_online' and 'guests' were kept.
+- Rows where column 'fee' have values above the threshold of the 3rd quartile (i.e., the 75th percentile) were ditched just to play safe. They represent less than 4% of the entries for each 'firm_id' (less than 2.5% of all entries in total).
+- Rows where the columns 'q1_bef' and 'q2' are null were ditched. In regard to 'q1_bef', they represent between 6.79% and 1.79% of the entries depending on the 'firm_id' (4.08% of all entries in total). In regard to 'q2', they represent between 5.39% and 1.79% of the entries depending on the 'firm_id' (3.58% of all entries in total).
+
+In summary, 29 columns and 1421 rows were lost (regarding the rows, they represent 5.68% of the total rows in the dataframe before the trimming process). Some columns were also removed after the trimming process due to lack of variation (namely 'visit_year' and 'source_online'). The resulting dataframe contains 29 columns and 23610 entries. It is leaner, easier to read and has no null entries except in 'q1_aft'.
+
+After this last trimming process, 'q1_aft' contained 14,851 null entries (about 63% of the entries). However, there was enough non-null entries to allow for "guessing" the null entries by using supervised classification.
+
+
 
 ... This 'read_me' is under construction, but the code file has been completed. Please, check 'data_analysis_and_results' code file. Be aware that sometimes you need to reload the code file more than once so it can be visualized here at github ...
