@@ -87,7 +87,7 @@ After further analysis and better understanding of the dataframe 'df' (please, c
 
 In summary, 29 columns and 1421 rows were lost (regarding the rows, they represent 5.68% of the total rows in the dataframe before the trimming process). Some columns were also removed after the trimming process due to lack of variation (namely 'visit_year' and 'source_online'). The resulting dataframe contains 29 columns and 23610 entries. It is leaner, easier to read and has no null entries except in 'q1_aft'.
 
-After this last trimming process, 'q1_aft' contained 14,851 null entries (about 63% of the entries). However, there was enough non-null entries to allow for "guessing" the null entries by using supervised classification.
+After this last trimming process, 'q1_aft' contained 14,851 null entries (about 63% of the entries). However, there was enough non-null entries to allow for "guessing" the null entries by using supervised classification. In fact, we actually worked with a variable still connected to 'q1_aft' but expressing a reduced number of categories. The original plan would include 'q1_aft' directly. However, by doing so, we would have to deal with eleven categories: scores from 0 to 10. Instead, we decided to take the difference between 'q1_aft' and 'q1_bef'. We then created a new variable called 'q1_dif3' which associates the value -1 for 'q1_aft' - 'q1_bef' < 0, 0 for 'q1_aft' - 'q1_bef' = 0, and 1 for 'q1_aft' - 'q1_bef' > 0. In short, the new target variable 'q1_dif3' has only three categories: -1 if the visit had a negative impact on the client, 0 if the visit was neutral, and 1 if the visit had a positive impact on the client.
 
 
 
