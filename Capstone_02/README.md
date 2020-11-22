@@ -1,5 +1,5 @@
 **Capstone 02: the booking company.**  
-*Updated on 10/28/2020.*
+*Updated on 11/20/2020.*  
 *Be aware that sometimes you need to reload the code file more than once so it can be visualized here at github.*
 
 **1-) Purpose.**
@@ -121,7 +121,7 @@ We also implemented k-means clustering. We first opted to implement k-means with
     - Cluster 2 is mainly composed by 'q2' = 2, clients who used the product at least once a month (closely followed by 'q2' = 1, those who used it only occasionaly).
     - Cluster 3 is mainly composed by 'q2' = 1, clients who used the product only occasionaly (followed by 'q2' = 0, those who never used it, so clusters 0 and 3 are similar in that regard).
 - Clusters 0 and 1 are mainly associated with 'firm_id' 40638 and 'us_region' MO (where the firm is located). Cluster 0 mostly contains clients who would give the product grade 5 out of 10 (question 'q1_bef') before the visit, with that grade improving after the visit (variable 'q1_dif3_pr_alt'). Cluster 1 mostly contains clients who would give the product grade 10 out of 10 before the visit, with that grade remaining the same after the visit.
-- Cluster 2 is mainly associated with 'firm_id' 36146 and 'us_region' CA (where the firm is located). Cluster 3 is mainly associated with 'firm_id' 26742 but also with 'us_region' CA (instead of CO where the firm is located). That happens because cluster 3 is weakly associated with 'firm_id' 26742 and could also be associated with 'firm_id' 36146 (see the table with frequencies at the bottom). Therefore, cluster 3 is also connected to 'firm_id 36146'.
+- Cluster 2 is mainly associated with 'firm_id' 36146 and 'us_region' CA (where the firm is located). Cluster 3 is mainly associated with 'firm_id' 26742 but also with 'us_region' CA (instead of CO where the firm is located). That happens because cluster 3 is weakly associated with 'firm_id' 26742 and could also be associated with 'firm_id' 36146. Therefore, cluster 3 is also connected to 'firm_id 36146'.
 - Cluster 2, like cluster 1, mostly contains clients who would give the product grade 10 out of 10 before the visit, with that grade remaining the same after the visit. Cluster 3, like cluster 0, mostly contains clients who would give the product grade 5 out of 10 before the visit, with that grade improving after the visit.
 
 In summary, there is evidence to say that, in general, customers who used and valued the product poorly before the visit improved their evaluation of the product after the visit. Customers who already used and valued the product well before the visit maintained their evaluation of the product after the visit.
