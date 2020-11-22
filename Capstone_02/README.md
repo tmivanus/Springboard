@@ -92,11 +92,15 @@ After this last trimming process, 'q1_aft' contained 14,851 null entries (about 
 Once defined the target variable as 'q1_dif3' and a list of attributes (more details about that in 'data_analysis_and_results' code file), we proceeded with the objective of using supervised classification to predict the 14,851 null entries of the target variable. For the sake of simplicity, we decided to use k-nearest neighbors (K-NN). Data was preprocessed using StandardScaler and Principal Component Analysis (PCA). The optimized k-NN classifier had 13 pca components and 18 neighbors. It seemed good predicting 'q1_dif3' equal to 1 or 0, but it showed deficiency predicting 'q1_dif3' equal to -1. The variable 'q1_dif3_pr' contains the predicted values for the missing data in 'q1_dif3' using this optimized k-NN classifier.
 
 Because the above k-NN classifier was deficient predicting 'q1_dif3' equal to -1, we decided to try a different approach. We create three binary target variables: 'q1_dif_neg' (for negative impact) which is 1 if 'q1_dif' < 0 and zero otherwise, 'q1_dif_neu' (for neutral impact) which is 1 if 'q1_dif' = 0 and zero otherwise, and 'q1_dif_pos' (for positive impact) which is 1 if 'q1_dif' > 0 and zero otherwise. Then we optimized a k-NN classifier for each of the three binary target variables and used it to predict the missing data in them. The new binary variables with the predicted values are 'q1_dif_neg_pr', 'q1_dif_neu_pr' and 'q1_dif_pos_pr'. Unsurprisingly, the classifiers for 'q1_dif_neu' and 'q1_dif_pos' were fine but the classifier for 'q1_dif_neg' was not reliable to predict when it should be 1. The new binary variables with the predicted values allowed us to reconstruct an alternative to 'q1_dif3_pr', which we called 'q1_dif3_pr_alt'. It is easy to see how:
-- if 'q1_dif_neg_pr' = 0 and 'q1_dif_neu_pr' = 0 and 'q1_dif_pos_pr' = 1, then 'q1_dif3_pr_alt' = 1 (visit had positive impact).
-- if 'q1_dif_neg_pr' = 0 and 'q1_dif_neu_pr' = 1 and 'q1_dif_pos_pr' = 0, then 'q1_dif3_pr_alt' = 0 (visit had neutral impact).
-- if 'q1_dif_neg_pr' = 1 and 'q1_dif_neu_pr' = 0 and 'q1_dif_pos_pr' = 0, then 'q1_dif3_pr_alt' = -1 (visit had negative impact).
+
+    - if 'q1_dif_neg_pr' = 0 and 'q1_dif_neu_pr' = 0 and 'q1_dif_pos_pr' = 1, then 'q1_dif3_pr_alt' = 1 (visit had positive impact).
+    - if 'q1_dif_neg_pr' = 0 and 'q1_dif_neu_pr' = 1 and 'q1_dif_pos_pr' = 0, then 'q1_dif3_pr_alt' = 0 (visit had neutral impact).
+    - if 'q1_dif_neg_pr' = 1 and 'q1_dif_neu_pr' = 0 and 'q1_dif_pos_pr' = 0, then 'q1_dif3_pr_alt' = -1 (visit had negative impact).
+
 However, because we know that the classifier for 'q1_dif_neg' underpredicts 1, we added the following rule:
-- if 'q1_dif_neg_pr' = 0 and 'q1_dif_neu_pr' = 0 and 'q1_dif_pos_pr' = 0, then 'q1_dif3_pr_alt' = -1 (visit had negative impact).
+
+    - if 'q1_dif_neg_pr' = 0 and 'q1_dif_neu_pr' = 0 and 'q1_dif_pos_pr' = 0, then 'q1_dif3_pr_alt' = -1 (visit had negative impact).
+
 In other words, instead of only relying on 'q1_dif_neg_pr' to decide when 'q1_dif3_pr_alt' should be -1, we also relied on the other two binary variables: when 'q1_dif_neu_pr' says that there was no neutral impact and 'q1_dif_pos_pr' also says that there was no positive impact, then 'q1_dif3_pr_alt' should register that there was negative impact no matter what 'q1_dif_neg_pr' is saying. With the inclusion of that simple rule, we were able to make predictions for 99.75% of the missing data: only 37 out of the initially 14851 null entries remained missing in 'q1_dif3_pr_alt'. We could have just removed those 37 rows, but we opted to maintain them and complete the predictions by just adding the previously predicted information from 'q1_dif3_pr'. In other words, for the remaining missing data, we just did 'q1_dif3_pr_alt' = 'q1_dif3_pr'.
 
 
