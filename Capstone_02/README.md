@@ -1,5 +1,6 @@
 **Capstone 02: the booking company.**  
 *Updated on 10/28/2020.*
+*Be aware that sometimes you need to reload the code file more than once so it can be visualized here at github.*
 
 **1-) Purpose.**
 
@@ -110,6 +111,17 @@ After having completed the task of predicting the missing values in 'q1_dif3' by
 - 'days_bf_visit', 'guests' and 'tot_rev_addons': they are all numeric variables by nature, no issues here.
 - 'q1_bef', 'q1_dif3_pr_alt' and 'q2': these are ordinal categorical variables. 'q1_bef' shows the likelihood to recommend the firm's product before visit on a scale 0 to 10. 'q1_dif3_pr_alt' shows if the visit had a negative (-1), neutral (0) or positive (1) impact on the client. 'q2' shows how often the client has used the firm's product in the past year on a scale 0 (never) to 3 (at least once a week).
 
-After
+Having chosen those 9 attributes, they were first standardized using StandardScaler and then PCA was applied to reduce the dimensionality from nine to two and plot the result. Two dimensions account for 41.8% of the variance. The scatter plot doesn't show clear distinct clusters, but a case could be made for four clusters.
 
-... This 'read_me' is under construction, but the code file has been completed. Please, check 'data_analysis_and_results' code file. Be aware that sometimes you need to reload the code file more than once so it can be visualized here at github ...
+We also implemented k-means clustering. We first opted to implement k-means without reducing dimensionality. Unfortunately, the results were even less clear: as we increased the number of clusters in order to find the optimal number of clusters, the sum of squared distances (errors) didn't show any evident "elbow", and the plot of the (mean) silhouette scores looked like a roller coast, which is not helpful. Because of that, we decided to implement k-means again but using PCA after the standardization of the attributes in order to reduce the dimensionality to two, despite the fact that two dimensions accounts for only 41.8% of the variance. This time the results were much clearer: for increasing number of clusters, the sum of squared distances (errors) showed an "elbow" with 4 clusters, and the plot of the (mean) silhouette scores also showed a maximum with 4 clusters, although the value of 0.42 for average silhouette score suggests a weak cluster structure. With 4 clusters, there were very few negative silhoute scores and the number of observations in each cluster also seems similar and, therefore, reasonable. The 4 suggested clusters have the following characteristics:
+
+- In terms of most often value (mode), the four clusters seem to distinguish the four categories in question 'q2', which asks how often the client used the product in the past year:
+    - Cluster 0 is mainly composed by 'q2' = 0, clients who never used the product in the past year (closely followed by 'q2' = 1, those who used it only occasionaly, see last table with frequencies).
+    - Cluster 1 is mainly composed by 'q2' = 3, clients who used the product at least once a week (they can be said to be fans).
+    - Cluster 2 is mainly composed by 'q2' = 2, clients who used the product at least once a month (closely followed by 'q2' = 1, those who used it only occasionaly).
+    - Cluster 3 is mainly composed by 'q2' = 1, clients who used the product only occasionaly (followed by 'q2' = 0, those who never used it, so clusters 0 and 3 are similar in that regard).
+- Clusters 0 and 1 are mainly associated with 'firm_id' 40638 and 'us_region' MO (where the firm is located). Cluster 0 mostly contains clients who would give the product grade 5 out of 10 (question 'q1_bef') before the visit, with that grade improving after the visit (variable 'q1_dif3_pr_alt'). Cluster 1 mostly contains clients who would give the product grade 10 out of 10 before the visit, with that grade remaining the same after the visit.
+- Cluster 2 is mainly associated with 'firm_id' 36146 and 'us_region' CA (where the firm is located). Cluster 3 is mainly associated with 'firm_id' 26742 but also with 'us_region' CA (instead of CO where the firm is located). That happens because cluster 3 is weakly associated with 'firm_id' 26742 and could also be associated with 'firm_id' 36146 (see the table with frequencies at the bottom). Therefore, cluster 3 is also connected to 'firm_id 36146'.
+- Cluster 2, like cluster 1, mostly contains clients who would give the product grade 10 out of 10 before the visit, with that grade remaining the same after the visit. Cluster 3, like cluster 0, mostly contains clients who would give the product grade 5 out of 10 before the visit, with that grade improving after the visit.
+
+In summary, there is evidence to say that, in general, customers who used and valued the product poorly before the visit improved their evaluation of the product after the visit. Customers who already used and valued the product well before the visit maintained their evaluation of the product after the visit.
